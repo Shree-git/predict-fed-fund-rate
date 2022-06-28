@@ -1,23 +1,58 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import React, { useState } from "react";
 
 function App() {
+  const [fedFund, setFedFund] = useState(0);
+  const [beigeText, setBeigeText] = useState("");
+  const [speechText, setSpeechText] = useState("");
+  const predict = () => {
+    fetch("http://localhost:5000", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        beigeText: beigeText,
+        speechText: speechText,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => setFedFund(data));
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div class="fedFund">
+        <h2>Fed Fund Prediction: {fedFund}</h2>
+      </div>
+      <div class="textboxes">
+        <div>
+          <h1>Beige Book</h1>
+          <textarea
+            type="text"
+            name="beigeBook"
+            placeholder="Type here"
+            value={beigeText}
+            onChange={(e) => setBeigeText(e.target.value)}
+            rows="30"
+            cols="60"
+          ></textarea>
+        </div>
+        <div>
+          <h1>Governer's Speech</h1>
+          <textarea
+            type="text"
+            name="governersSpeech"
+            placeholder="Type here"
+            value={speechText}
+            onChange={(e) => setSpeechText(e.target.value)}
+            rows="30"
+            cols="60"
+          ></textarea>
+        </div>
+      </div>
+      <button onClick={predict}>Predict Fed Fund</button>
     </div>
   );
 }
