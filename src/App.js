@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import React, { useState } from "react";
 
@@ -7,7 +6,7 @@ function App() {
   const [beigeText, setBeigeText] = useState("");
   const [speechText, setSpeechText] = useState("");
   const predict = () => {
-    fetch("http://localhost:5000", {
+    fetch("https://predictfedfund-backend.herokuapp.com/fedrate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -23,10 +22,10 @@ function App() {
 
   return (
     <div className="App">
-      <div class="fedFund">
+      <div className="fedFund">
         <h2>Fed Fund Prediction: {fedFund}</h2>
       </div>
-      <div class="textboxes">
+      <div className="textboxes">
         <div>
           <h1>Beige Book</h1>
           <textarea

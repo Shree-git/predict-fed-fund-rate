@@ -1,5 +1,5 @@
-from timeit import default_timer as timer
 from flask import Flask, jsonify, request
+
 from flask_cors import CORS
 
 from textblob import TextBlob
@@ -8,7 +8,12 @@ app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/", methods=["POST"])
+@app.route("/")
+def home_view():
+    return "<h1>Welcome to the backend!</h1>"
+
+
+@app.route("/fedrate", methods=["POST"])
 def get_fed_fund_rate():
     txt = request.get_json()
 
@@ -38,3 +43,7 @@ def sentiment_analysis(beigeText, speechText):
     )
 
     return FedFundPredicted
+
+
+if __name__ == "__main__":
+    app.run()
