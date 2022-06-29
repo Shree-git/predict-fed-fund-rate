@@ -10,8 +10,8 @@ function App() {
   const [beigeText, setBeigeText] = useState("");
   const [speechText, setSpeechText] = useState("");
   const predict = () => {
-    // fetch("https://predictfedfund-backend.herokuapp.com/fedrate", {
-    fetch("http://localhost:5000/fedrate", {
+    fetch("https://predictfedfund-backend.herokuapp.com/fedrate", {
+      // fetch("http://localhost:5000/fedrate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
