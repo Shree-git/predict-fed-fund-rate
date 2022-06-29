@@ -2,11 +2,16 @@ import "./App.css";
 import React, { useState } from "react";
 
 function App() {
-  const [fedFund, setFedFund] = useState(0);
+  const [fedFund, setFedFund] = useState(null);
+  const [bPolarity, setBPolarity] = useState(null);
+  const [bSub, setBSub] = useState(null);
+  const [gPolarity, setGPolarity] = useState(null);
+  const [gSub, setGSub] = useState(null);
   const [beigeText, setBeigeText] = useState("");
   const [speechText, setSpeechText] = useState("");
   const predict = () => {
-    fetch("https://predictfedfund-backend.herokuapp.com/fedrate", {
+    // fetch("https://predictfedfund-backend.herokuapp.com/fedrate", {
+    fetch("http://localhost:5000/fedrate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -17,7 +22,13 @@ function App() {
       }),
     })
       .then((res) => res.json())
-      .then((data) => setFedFund(data));
+      .then((data) => {
+        setFedFund(data[0]);
+        setBPolarity(data[1]);
+        setBSub(data[2]);
+        setGPolarity(data[3]);
+        setGSub(data[4]);
+      });
   };
 
   return (
@@ -37,6 +48,8 @@ function App() {
             rows="30"
             cols="60"
           ></textarea>
+          <h3>Subjectivity: {bSub}</h3>
+          <h3>Polarity: {bPolarity}</h3>
         </div>
         <div>
           <h1>Governer's Speech</h1>
@@ -49,6 +62,8 @@ function App() {
             rows="30"
             cols="60"
           ></textarea>
+          <h3>Subjectivity: {gSub}</h3>
+          <h3>Polarity: {gPolarity}</h3>
         </div>
       </div>
       <button onClick={predict}>Predict Fed Fund</button>

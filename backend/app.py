@@ -24,15 +24,21 @@ def get_fed_fund_rate():
 def sentiment_analysis(beigeText, speechText):
     BeigeBook = TextBlob(beigeText)
 
-    print(BeigeBook.sentiment.polarity)
+    bPolarity = BeigeBook.sentiment.polarity
+    bSubjectivity = BeigeBook.sentiment.subjectivity
 
-    print(BeigeBook.sentiment.subjectivity)
+    print(bPolarity)
+
+    print(bSubjectivity)
 
     GovernorsSpeeches = TextBlob(speechText)
 
-    print(GovernorsSpeeches.sentiment.polarity)
+    gPolarity = GovernorsSpeeches.sentiment.polarity
+    gSubjectivity = GovernorsSpeeches.sentiment.subjectivity
 
-    print(GovernorsSpeeches.sentiment.subjectivity)
+    print(gPolarity)
+
+    print(gSubjectivity)
 
     FedFundPredicted = (
         -0.0305
@@ -42,7 +48,7 @@ def sentiment_analysis(beigeText, speechText):
         + 0.2772 * GovernorsSpeeches.sentiment.subjectivity
     )
 
-    return FedFundPredicted
+    return [FedFundPredicted, bPolarity, bSubjectivity, gPolarity, gSubjectivity]
 
 
 if __name__ == "__main__":

@@ -1,16 +1,24 @@
-.App {
-  text-align: center;
+.App{
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
 }
 
 .fedFund{
   margin-top: 20px;
   color: saddlebrown;
+  text-align: center;
 }
 
 .textboxes{
   display: flex;
   justify-content: space-evenly;
-  margin: 20px;
+  /* margin: 20px; */
+}
+
+.textboxes > * {
+  margin-right: 40px;
 }
 
 textarea{
@@ -21,9 +29,11 @@ textarea{
 button{
   border: 1px solid #e4e4e4;
   border-radius: 10px;
-  padding: 10px;
+  padding: 20px;
   margin: 10px;
   background-color: aqua;
+  text-align: center;
+
 }
 
 button:hover{
