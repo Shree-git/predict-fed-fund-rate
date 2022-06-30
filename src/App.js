@@ -50,7 +50,7 @@ function App() {
       bPolBar.innerHTML = (bPolarity * 100).toFixed(2) + "%";
     };
     setProgressBars();
-  }, [fedFund]);
+  }, [gSub, bSub, gPolarity, bPolarity]);
 
   return (
     <div className="App">
