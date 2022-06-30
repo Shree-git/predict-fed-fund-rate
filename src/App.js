@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function App() {
   const [fedFund, setFedFund] = useState(null);
@@ -9,9 +9,12 @@ function App() {
   const [gSub, setGSub] = useState(null);
   const [beigeText, setBeigeText] = useState("");
   const [speechText, setSpeechText] = useState("");
+  const backendAPIPoint =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:5000/fedrate"
+      : "https://predictfedfund-backend.herokuapp.com/fedrate";
   const predict = () => {
-    fetch("https://predictfedfund-backend.herokuapp.com/fedrate", {
-      // fetch("http://localhost:5000/fedrate", {
+    fetch(backendAPIPoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,10 +34,29 @@ function App() {
       });
   };
 
+  useEffect(() => {
+    setProgressBars();
+  }, [fedFund]);
+
+  const setProgressBars = () => {
+    const gSubBar = document.querySelector(".gSubBar");
+    const bSubBar = document.querySelector(".bSubBar");
+    const gPolBar = document.querySelector(".gPolBar");
+    const bPolBar = document.querySelector(".bPolBar");
+    gSubBar.style.width = gSub * 100 + "%";
+    gSubBar.innerHTML = (gSub * 100).toFixed(2) + "%";
+    bSubBar.style.width = bSub * 100 + "%";
+    bSubBar.innerHTML = (bSub * 100).toFixed(2) + "%";
+    gPolBar.style.width = gPolarity * 100 + "%";
+    gPolBar.innerHTML = (gPolarity * 100).toFixed(2) + "%";
+    bPolBar.style.width = bPolarity * 100 + "%";
+    bPolBar.innerHTML = (bPolarity * 100).toFixed(2) + "%";
+  };
+
   return (
     <div className="App">
       <div className="fedFund">
-        <h2>Fed Fund Prediction: {fedFund}</h2>
+        <h2>Fed Fund Prediction: {(fedFund * 100).toFixed(2)}%</h2>
       </div>
       <div className="textboxes">
         <div>
@@ -48,8 +70,20 @@ function App() {
             rows="30"
             cols="60"
           ></textarea>
-          <h3>Subjectivity: {bSub}</h3>
-          <h3>Polarity: {bPolarity}</h3>
+          <div className="bars">
+            <h3>Subjectivity: </h3>
+            <div className="progressBar">
+              <div className="bSubBar"></div>
+            </div>
+          </div>
+          <div className="bars">
+            <h3>Polarity: </h3>
+            <div className="progressBar">
+              <div className="bPolBar"></div>
+            </div>
+          </div>
+          {/* <h3>Subjectivity: {bSub.toFixed(4)}</h3>
+          <h3>Polarity: {bPolarity.toFixed(4)}</h3> */}
         </div>
         <div>
           <h1>Governer's Speech</h1>
@@ -62,8 +96,19 @@ function App() {
             rows="30"
             cols="60"
           ></textarea>
-          <h3>Subjectivity: {gSub}</h3>
-          <h3>Polarity: {gPolarity}</h3>
+          <div className="bars">
+            <h3>Subjectivity: </h3>
+            <div className="progressBar">
+              <div className="gSubBar"></div>
+            </div>
+          </div>
+          <div className="bars">
+            <h3>Polarity: </h3>
+            <div className="progressBar">
+              <div className="gPolBar"></div>
+            </div>
+          </div>
+          {/* <h3>Polarity: {gPolarity.toFixed(4)}</h3> */}
         </div>
       </div>
       <button onClick={predict}>Predict Fed Fund</button>
