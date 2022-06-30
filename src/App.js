@@ -34,24 +34,23 @@ function App() {
       });
   };
 
-  const setProgressBars = () => {
-    const gSubBar = document.querySelector(".gSubBar");
-    const bSubBar = document.querySelector(".bSubBar");
-    const gPolBar = document.querySelector(".gPolBar");
-    const bPolBar = document.querySelector(".bPolBar");
-    gSubBar.style.width = gSub * 100 + "%";
-    gSubBar.innerHTML = (gSub * 100).toFixed(2) + "%";
-    bSubBar.style.width = bSub * 100 + "%";
-    bSubBar.innerHTML = (bSub * 100).toFixed(2) + "%";
-    gPolBar.style.width = gPolarity * 100 + "%";
-    gPolBar.innerHTML = (gPolarity * 100).toFixed(2) + "%";
-    bPolBar.style.width = bPolarity * 100 + "%";
-    bPolBar.innerHTML = (bPolarity * 100).toFixed(2) + "%";
-  };
-
   useEffect(() => {
+    const setProgressBars = () => {
+      const gSubBar = document.querySelector(".gSubBar");
+      const bSubBar = document.querySelector(".bSubBar");
+      const gPolBar = document.querySelector(".gPolBar");
+      const bPolBar = document.querySelector(".bPolBar");
+      gSubBar.style.width = gSub * 100 + "%";
+      gSubBar.innerHTML = (gSub * 100).toFixed(2) + "%";
+      bSubBar.style.width = bSub * 100 + "%";
+      bSubBar.innerHTML = (bSub * 100).toFixed(2) + "%";
+      gPolBar.style.width = gPolarity * 100 + "%";
+      gPolBar.innerHTML = (gPolarity * 100).toFixed(2) + "%";
+      bPolBar.style.width = bPolarity * 100 + "%";
+      bPolBar.innerHTML = (bPolarity * 100).toFixed(2) + "%";
+    };
     setProgressBars();
-  }, [gSub, bSub, gPolarity, bPolarity]);
+  }, [fedFund]);
 
   return (
     <div className="App">
