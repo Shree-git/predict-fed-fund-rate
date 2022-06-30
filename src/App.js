@@ -34,10 +34,6 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    setProgressBars();
-  }, [fedFund]);
-
   const setProgressBars = () => {
     const gSubBar = document.querySelector(".gSubBar");
     const bSubBar = document.querySelector(".bSubBar");
@@ -52,6 +48,10 @@ function App() {
     bPolBar.style.width = bPolarity * 100 + "%";
     bPolBar.innerHTML = (bPolarity * 100).toFixed(2) + "%";
   };
+
+  useEffect(() => {
+    setProgressBars();
+  }, [gSub, bSub, gPolarity, bPolarity]);
 
   return (
     <div className="App">
