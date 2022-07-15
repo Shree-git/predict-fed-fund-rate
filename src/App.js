@@ -55,7 +55,10 @@ function App() {
   return (
     <div className="App">
       <div className="fedFund">
-        <h2>Fed Fund Prediction: {(fedFund * 100).toFixed(2)}%</h2>
+        <h2>
+          Loan Loss Reserve To Total Loans Predicted Value:{" "}
+          {(fedFund * 100).toFixed(2)}%
+        </h2>
       </div>
       <div className="textboxes">
         <div>
@@ -110,7 +113,7 @@ function App() {
           {/* <h3>Polarity: {gPolarity.toFixed(4)}</h3> */}
         </div>
       </div>
-      <button onClick={predict}>Predict Fed Fund</button>
+      <button onClick={predict}>Predict</button>
     </div>
   );
 }

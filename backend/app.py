@@ -40,15 +40,15 @@ def sentiment_analysis(beigeText, speechText):
 
     print(gSubjectivity)
 
-    FedFundPredicted = (
-        -0.0305
-        + 0.7250 * BeigeBook.sentiment.polarity
-        - 0.3938 * BeigeBook.sentiment.subjectivity
-        + 0.2882 * GovernorsSpeeches.sentiment.polarity
-        + 0.2772 * GovernorsSpeeches.sentiment.subjectivity
+    LoanLossReserve = (
+        0.0068
+        - 0.1218 * BeigeBook.sentiment.polarity
+        - 0.1362 * BeigeBook.sentiment.subjectivity
+        - 0.0677 * GovernorsSpeeches.sentiment.polarity
+        + 0.1962 * GovernorsSpeeches.sentiment.subjectivity
     )
 
-    return [FedFundPredicted, bPolarity, bSubjectivity, gPolarity, gSubjectivity]
+    return [LoanLossReserve, bPolarity, bSubjectivity, gPolarity, gSubjectivity]
 
 
 if __name__ == "__main__":
