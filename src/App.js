@@ -12,7 +12,7 @@ function App() {
   const backendAPIPoint =
     process.env.NODE_ENV === "development"
       ? "http://127.0.0.1:5000/fedrate"
-      : "https://predict-fed-fund-rate-backend-kwxvfdxeta-uc.a.run.app/fedrate";
+      : "https://new-app-wtd2l6chxa-uc.a.run.app/fedrate";
   const predict = () => {
     fetch(backendAPIPoint, {
       method: "POST",
